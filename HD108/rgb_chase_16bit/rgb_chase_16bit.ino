@@ -1,7 +1,12 @@
 // the sensor communicates using SPI, so include the library:
 #include <SPI.h>
 
-//  Clock: SCLK = 18 = P18 = VSP|SCK
+//Make sure to connect led strip to the correct (default) SPI pins.
+// For  ESP8266
+//  Clock: HSCLK = 14 = GPIO 14 = D5 (Yellow)
+//  Data: HMOSI = 13 = GPIO13 = D7 (Green)
+// For ESP32 use:
+//  Clock: SCLK = 18=  P18 = VSP|SCK
 //  Data: MOSI = GPIO23 = P23 = 23 
 
 #define NUMPIXELS 5*72
@@ -23,7 +28,7 @@ void setup() {
   SPI.begin();
 
   //Overwrite the 5-bit brightness values here if desired:
-  blueb = 0b00000;
+  blueb = 0b10000;
   greenb = 0b00000;
   redb = 0b00000;
 
@@ -46,12 +51,12 @@ void loop() {
     write_strand();
 
     //Add an impercepable delay after each frame to ensure slower chips don't lock up
-    delay(1);
+    delay(0);
   }
 }
 
 void write_strand() {
-    SPI.beginTransaction(SPISettings(1000000, MSBFIRST, SPI_MODE3));
+    SPI.beginTransaction(SPISettings(2*1E6, MSBFIRST, SPI_MODE0));
 
   // Start frame - 128bits of 0
   for (int i = 0; i < 8; i++) {SPI.transfer16(0);}
