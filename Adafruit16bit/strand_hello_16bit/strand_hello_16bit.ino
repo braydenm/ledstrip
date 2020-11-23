@@ -15,6 +15,11 @@
 //#define CLOCKPIN   18
 //#define DATAPIN    23
 
+uint16_t lastcolorred = 0xFF;
+uint16_t lastcolorgreen = 0x00;
+uint16_t lastcolorblue = 0xFF;
+uint32_t lastcolor = (lastcolorred << 16) | (lastcolorgreen << 8) | (lastcolorblue);
+
 Adafruit_DotStar strip(NUMPIXELS, DOTSTAR_RGB);
 void setup() {
   strip.begin(); // Initialize pins for output
@@ -28,6 +33,7 @@ void loop() {
   strip.setPixelColor(3, 0xFF0000); //Fourth pixel is red
   strip.setPixelColor(4, 0x00FF00); //Fifth pixel is green
   strip.setPixelColor(5, 0x0000FF); //Sixth pixel is blue
+  strip.setPixelColor(6, lastcolor); //Seventh pixel is made by bit shifting and |
   strip.show();                     // Refresh strip
   delay(10);                        // Pause 20 milliseconds (~50 FPS)
 }

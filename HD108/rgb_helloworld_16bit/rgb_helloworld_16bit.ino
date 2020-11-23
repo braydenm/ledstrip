@@ -2,6 +2,7 @@
 #include <SPI.h>
 
 //Make sure to connect led strip to the correct (default) SPI pins.
+
 // For  ESP8266
 //  Clock: HSCLK = 14 = GPIO 14 = D5 (Yellow)
 //  Data: HMOSI = 13 = GPIO13 = D7 (Green)
@@ -33,7 +34,7 @@ void setup() {
   blue[2] = 0xFFFF;
 
   //Overwrite the 5-bit brightness values here if desired:
-  blueb = 0b00000;
+  blueb = 0b11000;
   greenb = 0b00000;
   redb = 0b00011;
 

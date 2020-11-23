@@ -56,7 +56,7 @@ void loop() {
 }
 
 void write_strand() {
-    SPI.beginTransaction(SPISettings(2*1E6, MSBFIRST, SPI_MODE0));
+    SPI.beginTransaction(SPISettings(1*1E6, MSBFIRST, SPI_MODE0));
 
   // Start frame - 128bits of 0
   for (int i = 0; i < 8; i++) {SPI.transfer16(0);}
